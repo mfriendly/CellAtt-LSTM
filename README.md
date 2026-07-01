@@ -17,7 +17,7 @@ Python 3.10+, PyTorch 2.0+, CUDA GPU recommended.
 
 ## Data
 
-Raw surveillance data is not bundled (all sources are public). Download `CellAtt-LSTM-data.zip` and unzip into the repository root so the layout becomes `data/raw/covid/US/`, `data/raw/covid/AU/`, and `data/raw/dengue/BR/`:
+Download `CellAtt-LSTM-data.zip`(https://drive.google.com/file/d/1fOZfahIuwsWLsTd0opXsTYfKfnKf9BeY/view?usp=sharing) and unzip into the repository root so the layout becomes `data/raw/covid/US/`, `data/raw/covid/AU/`, and `data/raw/dengue/BR/`:
 ```
 unzip CellAtt-LSTM-data.zip -d data/raw/
 ```
