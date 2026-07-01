@@ -1,0 +1,89 @@
+# ─── Dataset ───
+dataset: dengue
+nation: BR
+granularity: weekly
+data_dir: data/raw/dengue/BR
+
+# ─── Date split ───
+train_start_date: "2015-01-04"
+val_start_date: "2021-01-03"
+test_start_date: "2022-07-03"
+test_end_date: "2024-12-22"
+
+# ─── Preprocessing ───
+rolling: true
+rolling_window: 4
+diff: true
+scaler: standard
+replace_zero_to_nan: true
+
+# ─── Feature selection (mRMR) ───
+cfs: true
+lag_max: 20
+pcc_threshold: 0.3
+max_features: 20
+
+# ─── Window ───
+past_steps: 12
+future_steps: 12
+
+# ─── Training ───
+epochs: 100
+batch_size: 64
+lr: 0.001
+patience: 20
+seed: 1
+
+# ─── Model (override per model) ───
+model: triatt_lstm
+hidden_size: 128
+dropout: 0.1
+dropout_type: zoneout
+n_heads: 8
+output_size: 1
+dtype: float
+
+# TriAttLSTM specific
+layer_string: "0101"
+use_curriculum_learning: true
+cl_decay_steps: 300
+activations: [gelu]
+last_skip: false
+last_linear: true
+add_skips: false
+
+# Transformer / PatchTST / iTransformer
+d_model: 128
+d_ff: 256
+e_layers: 2
+d_layers: 1
+factor: 1
+activation: gelu
+patch_len: 4
+patch_stride: 2
+
+# TSLib baselines (DLinear/Autoformer decomposition, TimesNet, TimeMixer, etc.)
+moving_avg: 25
+top_k: 5
+num_kernels: 6
+seg_len: 6
+win_size: 2
+down_sampling_window: 2
+down_sampling_layers: 2
+down_sampling_method: avg
+channel_independence: 0
+decomp_method: moving_avg
+
+# TCN
+tcn_channels: [64, 64, 64]
+tcn_kernel_size: 3
+tcn_use_attention: true
+
+# ─── Evaluation ───
+eval_stride: 1
+eval_type: window
+ws: 2
+horizon_steps: [2, 4, 6, 8, 10, 12]
+
+# ─── Device ───
+device: "cuda:7"

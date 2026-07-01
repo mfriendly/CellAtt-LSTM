@@ -1,0 +1,24 @@
+# Anonymous review — exclude author-identifying content
+paper/
+
+# Logs (contain local machine paths)
+nohup.out
+results/**/logs/
+results/**/*.txt
+results/resubmission/sweep_finetune/logs/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Raw surveillance data — distributed separately (see README), not in repo
+data/raw/
+
+# OS
+.DS_Store
+Thumbs.db

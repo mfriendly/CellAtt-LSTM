@@ -1,0 +1,86 @@
+# ─── Dataset ───
+dataset: covid
+nation: AU
+granularity: daily
+data_dir: data/raw/covid/AU
+
+# ─── Date split ───
+train_start_date: "2020-02-29"
+val_start_date: "2021-08-01"
+test_start_date: "2022-02-01"
+test_end_date: "2022-09-09"
+
+# ─── Preprocessing ───
+rolling: true
+rolling_window: 7
+diff: true
+scaler: standard
+replace_zero_to_nan: true
+
+# ─── Feature selection (mRMR) ───
+cfs: true
+lag_max: 20
+pcc_threshold: 0.3
+max_features: 20
+
+# ─── Window ───
+past_steps: 42
+future_steps: 42
+
+# ─── Training ───
+epochs: 100
+batch_size: 512
+lr: 0.0005
+patience: 20
+seed: 1
+
+# ─── Model ───
+model: triatt_lstm
+hidden_size: 64
+dropout: 0.3
+dropout_type: zoneout
+n_heads: 8
+output_size: 1
+dtype: float
+
+layer_string: "0101"
+use_curriculum_learning: true
+cl_decay_steps: 300
+activations: [gelu]
+last_skip: false
+last_linear: true
+add_skips: false
+
+d_model: 64
+d_ff: 256
+e_layers: 2
+d_layers: 1
+factor: 1
+activation: gelu
+patch_len: 4
+patch_stride: 2
+
+# TSLib baselines
+moving_avg: 25
+top_k: 5
+num_kernels: 6
+seg_len: 6
+win_size: 2
+down_sampling_window: 2
+down_sampling_layers: 2
+channel_independence: 0
+decomp_method: moving_avg
+
+# TCN
+tcn_channels: [64, 64, 64]
+tcn_kernel_size: 3
+tcn_use_attention: true
+
+# ─── Evaluation ───
+eval_stride: 7
+eval_type: window
+ws: 5
+horizon_steps: [5, 9, 13, 17, 21, 25, 29, 33, 37, 41]
+
+# ─── Device ───
+device: "cuda:7"
